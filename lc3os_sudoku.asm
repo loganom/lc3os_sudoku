@@ -31,8 +31,8 @@
 	.FILL BAD_TRAP	; x1B
 	.FILL BAD_TRAP	; x1C
 	.FILL BAD_TRAP	; x1D
-	.FILL BAD_TRAP	; x1E
-	.FILL TRAP_NEXT_SET_BIT	; x1F
+	.FILL TRAP_GET_CARDINALITY	; x1E ; LM
+	.FILL TRAP_NEXT_SET_BIT	; x1F ; LM
 	.FILL TRAP_GETC	; x20
 	.FILL TRAP_OUT	; x21
 	.FILL TRAP_PUTS	; x22
@@ -50,7 +50,7 @@
 	.FILL BAD_TRAP	; x2E
 	.FILL BAD_TRAP	; x2F
 	.FILL BAD_TRAP	; x30
-	.FILL TRAP_R_SHIFT	; x31
+	.FILL TRAP_R_SHIFT	; x31 ; JF
 	.FILL BAD_TRAP	; x32
 	.FILL BAD_TRAP	; x33
 	.FILL BAD_TRAP	; x34
@@ -771,6 +771,35 @@ NEXT_SET_BIT_FOUND
 ;;; 		        location of the value you wish to check is specified
 ;;; 		        by R0. The result will be returned in R0 [0:3].
 
-;;; TRAP_SHIFT_LEFT
-;;; TRAP_SHIFT_RIGHT
-;;; TRAP_CARDINALITY
+;;; TRAP_GET_CARDINALITY - Returns the cardinality of set bits in [0:8]
+;;;	 		Value to check in R0, return in R0.
+TRAP_GET_CARDINALITY
+	ST R1,OS_SAVE_R1
+	ST R2,OS_SAVE_R2
+	ST R3,OS_SAVE_R3
+	ST R4,OS_SAVE_R4
+	AND R2,R2,#0
+	AND R3,R3,#0
+	AND R4,R4,#0
+
+	ADD R2,R2,#9
+
+TRAP_GET_CARD
+	AND R3,R0,x01		; mask with x0001
+	BRz TRAP_GET_CARD_SKIP
+	ADD R4,R4,#1
+
+TRAP_GET_CARD_SKIP
+	AND R1,R1,#0
+	ADD R1,R1,#1
+	TRAP x31
+	ADD R2,R2,#-1
+	BRzp TRAP_GET_CARD
+
+	ADD R0,R4,#0 		; put result into R0
+
+	LD R1,OS_SAVE_R1
+	LD R2,OS_SAVE_R2
+	LD R3,OS_SAVE_R3
+	LD R4,OS_SAVE_R4
+	RET
