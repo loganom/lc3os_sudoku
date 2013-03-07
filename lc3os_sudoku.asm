@@ -691,8 +691,8 @@ BAD_INT		RTI
 TRAP_IN_MSG	.STRINGZ "\nInput a character> "
 
 
-;;; R_SHIFT - returns the bit shifted value R1 times. The value you wish to shift
-;;;           should be in R0. The result will be in R0. R1 is lost.
+;;; R_SHIFT - returns the bit shifted value R1 times. The value you 
+;;; wish to shift should be in R0. The result will be in R0. R1 is lost.
 ;;; 	     
 ;;; 	     NOTE: DOES NOT WORK FOR NEGATIVE R0.
 TRAP_R_SHIFT
@@ -728,9 +728,8 @@ R_SHIFT_COMPLETE
 
 
 ;;; TRAP_NEXT_SET_BIT - returns the next set bit starting at bit location 
-;;; 		        R1 [0:7] and ending at bit location R1 [8:15]. The 
-;;; 		        The value you wish to check is specified
-;;; 		        by R0. The result will be returned in R0 [0:3].
+;;; R1 [0:7] and ending at bit location R1 [8:15]. The value you wish to 
+;;; check is specified by R0. The result will be returned in R0 [0:3].
 TRAP_NEXT_SET_BIT
 	ST R2,OS_SAVE_R2
 	ST R3,OS_SAVE_R3
@@ -767,12 +766,11 @@ NEXT_SET_BIT_FOUND
 
 
 ;;; TRAP_NEXT_CLEAR_BIT - returns the next cleared bit starting at bit location 
-;;; 		          R1 [0:3] and ending at bit location R1 [4:7]. The 
-;;; 		          location of the value you wish to check is specified
-;;; 		          by R0. The result will be returned in R0 [0:3].
+;;; R1 [0:3] and ending at bit location R1 [4:7]. The location of the value you 
+;;; wish to check is specified by R0. The result will be returned in R0 [0:3].
 
 ;;; TRAP_GET_CARDINALITY - Returns the cardinality of set bits in [0:8]
-;;;	 		   Value to check in R0, return in R0.
+;;; Value to check in R0, return in R0.
 TRAP_GET_CARDINALITY
 	ST R1,OS_SAVE_R1
 	ST R2,OS_SAVE_R2
