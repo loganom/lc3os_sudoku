@@ -692,7 +692,7 @@ TRAP_IN_MSG	.STRINGZ "\nInput a character> "
 
 
 ;;; R_SHIFT - returns the bit shifted value R1 times. The value you wish to shift
-;;;     	     should be in R0. The result will be in R0. R1 is lost.
+;;;           should be in R0. The result will be in R0. R1 is lost.
 ;;; 	     
 ;;; 	     NOTE: DOES NOT WORK FOR NEGATIVE R0.
 TRAP_R_SHIFT
@@ -710,7 +710,7 @@ R_SHIFT_VALUE_CALC
 	BRz R_SHIFT_CONTINUE 	; do work if R1 = 0
 
 	ADD R5,R5,R5 		; add R5<-R5+R5 which in effect goes up a power of two.
-	BRnzp R_SHIFT_VALUE_CALC 	; unconditionally go back
+	BRnzp R_SHIFT_VALUE_CALC 
 
 R_SHIFT_CONTINUE 	
 	ADD R0,R0,R5
@@ -728,9 +728,9 @@ R_SHIFT_COMPLETE
 
 
 ;;; TRAP_NEXT_SET_BIT - returns the next set bit starting at bit location 
-;;; 		      R1 [0:7] and ending at bit location R1 [8:15]. The 
-;;; 		      The value you wish to check is specified
-;;; 		      by R0. The result will be returned in R0 [0:3].
+;;; 		        R1 [0:7] and ending at bit location R1 [8:15]. The 
+;;; 		        The value you wish to check is specified
+;;; 		        by R0. The result will be returned in R0 [0:3].
 TRAP_NEXT_SET_BIT
 	ST R2,OS_SAVE_R2
 	ST R3,OS_SAVE_R3
@@ -739,10 +739,10 @@ TRAP_NEXT_SET_BIT
 	ST R7,OS_SAVE_R7_OUT
 	AND R5,R5,#0
 
-	LD R4,HIGH_8_BITS		; xFF00
+	LD R4,HIGH_8_BITS	; xFF00
 	AND R3,R1,R4 		; result is end index
 
-	LD R4,LOW_8_BITS 		; x00FF
+	LD R4,LOW_8_BITS 	; x00FF
 	AND R2,R1,R4 		; result is start index
 	AND R1,R1,R4 		; put a copy of start index into R1
 
@@ -767,12 +767,12 @@ NEXT_SET_BIT_FOUND
 
 
 ;;; TRAP_NEXT_CLEAR_BIT - returns the next cleared bit starting at bit location 
-;;; 		       R1 [0:3] and ending at bit location R1 [4:7]. The 
-;;; 		        location of the value you wish to check is specified
-;;; 		        by R0. The result will be returned in R0 [0:3].
+;;; 		          R1 [0:3] and ending at bit location R1 [4:7]. The 
+;;; 		          location of the value you wish to check is specified
+;;; 		          by R0. The result will be returned in R0 [0:3].
 
 ;;; TRAP_GET_CARDINALITY - Returns the cardinality of set bits in [0:8]
-;;;	 		Value to check in R0, return in R0.
+;;;	 		   Value to check in R0, return in R0.
 TRAP_GET_CARDINALITY
 	ST R1,OS_SAVE_R1
 	ST R2,OS_SAVE_R2
