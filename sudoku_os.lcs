@@ -1,0 +1,15 @@
+reset
+
+as lc3os_sudoku.asm
+load lc3os_sudoku.obj
+
+<as file_name.asm>
+<load file_name.obj>
+
+<set pc x****>
+
+<set r0 x****>
+<set r1 x****>
+<set rn x****>
+
+<continue | next | step | ...>
