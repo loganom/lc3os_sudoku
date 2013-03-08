@@ -1,6 +1,6 @@
 	.ORIG x4000
 
-;;; ONLY CHOICE - The only choice subroutine will take a starting address and 
+;;; ONLY POSSIBILITY - The only choice subroutine will take a starting address and 
 ;;;		proceed through the next 8 addresses, and if a cell among a region
 ;;;		has a digit for a possibility and is the only cell with said
 ;;;		possibility, it will set the cardinality to 0, [15] to 1, and set
